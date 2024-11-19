@@ -1,0 +1,47 @@
+<?php
+
+function insertionSort($array) {
+    // Obtener la longitud del array
+    $n = count($array);
+    
+    // Recorrer el array comenzando desde el segundo elemento
+    for ($i = 1; $i < $n; $i++) {
+        // Guardar el elemento actual que vamos a ordenar
+        $elementoActual = $array[$i];
+        
+        // Índice del elemento anterior
+        $j = $i - 1;
+        
+        // Mover los elementos mayores que elementoActual una posición adelante
+        while ($j >= 0 && $array[$j] > $elementoActual) {
+            $array[$j + 1] = $array[$j];
+            $j--;
+        }
+        
+        // Colocar elementoActual en su posición correcta
+        $array[$j + 1] = $elementoActual;
+        
+        // Mostrar el estado del array después de cada iteración
+        echo "Paso " . $i . ": ";
+        print_r($array);
+    }
+    
+    return $array;
+}
+
+// Lista de nombres de ejemplo
+$nombres = ["Juan", "Ana", "Pedro", "María", "Carlos", "Sofía", "Diego"];
+
+// Mostrar la lista original
+echo "Lista original:\n";
+print_r($nombres);
+echo "\nProceso de ordenamiento:\n";
+
+// Aplicar Insertion Sort
+$nombresOrdenados = insertionSort($nombres);
+
+// Mostrar la lista ordenada final
+echo "\nLista ordenada final:\n";
+print_r($nombresOrdenados);
+
+?>

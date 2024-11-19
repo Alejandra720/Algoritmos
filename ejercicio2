@@ -1,0 +1,69 @@
+<?php
+
+function mergeSort($lista) {
+    // Caso base: si la lista tiene 1 o menos elementos, ya está ordenada
+    if (count($lista) <= 1) {
+        return $lista;
+    }
+    
+    // Encontrar el punto medio de la lista
+    $medio = floor(count($lista) / 2);
+    
+    // Dividir la lista en dos mitades
+    $izquierda = array_slice($lista, 0, $medio);
+    $derecha = array_slice($lista, $medio);
+    
+    // Llamadas recursivas para ordenar cada mitad
+    $izquierda = mergeSort($izquierda);
+    $derecha = mergeSort($derecha);
+    
+    // Combinar las mitades ordenadas
+    return merge($izquierda, $derecha);
+}
+
+function merge($izquierda, $derecha) {
+    $resultado = [];
+    $i = 0; // Índice para la lista izquierda
+    $j = 0; // Índice para la lista derecha
+    
+    // Comparar y combinar elementos
+    while ($i < count($izquierda) && $j < count($derecha)) {
+        if ($izquierda[$i] <= $derecha[$j]) {
+            $resultado[] = $izquierda[$i];
+            $i++;
+        } else {
+            $resultado[] = $derecha[$j];
+            $j++;
+        }
+    }
+    
+    // Agregar elementos restantes de la lista izquierda
+    while ($i < count($izquierda)) {
+        $resultado[] = $izquierda[$i];
+        $i++;
+    }
+    
+    // Agregar elementos restantes de la lista derecha
+    while ($j < count($derecha)) {
+        $resultado[] = $derecha[$j];
+        $j++;
+    }
+    
+    return $resultado;
+}
+
+// Lista de ejemplo
+$palabras = ["manzana", "banana", "pera", "uva", "kiwi", "naranja", "limón"];
+
+// Mostrar lista original
+echo "Lista original:\n";
+print_r($palabras);
+
+// Aplicar Merge Sort
+$palabrasOrdenadas = mergeSort($palabras);
+
+// Mostrar lista ordenada
+echo "\nLista ordenada:\n";
+print_r($palabrasOrdenadas);
+
+?>

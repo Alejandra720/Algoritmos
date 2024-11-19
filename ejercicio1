@@ -1,0 +1,47 @@
+<?php
+
+function bubbleSort(&$arr) {
+    // Obtener la longitud del array
+    $n = count($arr);
+    
+    // Variable para optimización - detectar si hubo intercambios
+    $huboIntercambio = true;
+    
+    // Imprimir el array original
+    echo "Lista original: " . implode(", ", $arr) . "\n";
+    
+    // Bucle principal - se ejecuta mientras haya intercambios
+    $pasada = 1;
+    while($huboIntercambio) {
+        // Reiniciamos la bandera en cada pasada
+        $huboIntercambio = false;
+        
+        // Recorremos el array hasta n-1 elementos
+        for($i = 0; $i < $n-1; $i++) {
+            // Comparamos elementos adyacentes
+            // Para orden descendente, intercambiamos si el actual es menor que el siguiente
+            if($arr[$i] < $arr[$i + 1]) {
+                // Realizar el intercambio
+                $temp = $arr[$i];
+                $arr[$i] = $arr[$i + 1];
+                $arr[$i + 1] = $temp;
+                
+                // Marcamos que hubo un intercambio
+                $huboIntercambio = true;
+            }
+        }
+        
+        // Mostrar el estado después de cada pasada
+        echo "Pasada $pasada: " . implode(", ", $arr) . "\n";
+        $pasada++;
+    }
+    
+    // Imprimir el resultado final
+    echo "Lista ordenada descendente: " . implode(", ", $arr) . "\n";
+}
+
+// Ejemplo de uso con una lista que incluye duplicados y números negativos
+$numeros = [64, -34, 25, 12, 22, 11, 90, -34, 25];
+bubbleSort($numeros);
+
+?>
